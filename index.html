@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="David Madienguela - Software Engineer & Photographer">
+    <title>David | Engineer & Artist</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-theme">
+
+    <!-- Canvas for floating animated bubbles -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Cursor (Outline only, native pointer visible) -->
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Bento Box Container -->
+    <main class="bento-container">
+
+        <!-- Hero Card (Span 2 cols, 2 rows) -->
+        <div class="bento-card bento-hero glass-panel">
+            <h1 class="hero-title">David Madienguela</h1>
+            <div class="typewriter-container">
+                <span id="typewriter"></span><span class="cursor">|</span>
+            </div>
+            <p class="hero-desc">Architecting high-performance digital systems & capturing high-fidelity visual data
+                through the lens.</p>
+            <div class="hero-actions">
+                <a href="mailto:hello@example.com" class="btn btn-primary">Initialise Connection</a>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub" class="social-icon">GH</a>
+                    <a href="#" aria-label="LinkedIn" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Card -->
+        <div class="bento-card bento-about glass-panel">
+            <h3>System & Sensor Synergy</h3>
+            <div class="about-pills">
+                <span class="pill">💻 Sys. Architect</span>
+                <span class="pill">📸 Optical Capture</span>
+                <span class="pill">⚡ Cybernetics</span>
+                <span class="pill">🎨 UI Constructor</span>
+            </div>
+            <p>Optimising algorithmic efficiency in the matrix while capturing pristine photon data in physical reality.
+            </p>
+        </div>
+
+        <!-- Software App 1 -->
+        <div class="bento-card bento-app has-bg glass-panel group"
+            style="background-image: url('./assets/finance.png');">
+            <div class="card-overlay">
+                <p class="tag">Module</p>
+                <h3>Nexus Finance API</h3>
+                <span class="tech-tag">React / Node OS</span>
+            </div>
+        </div>
+
+        <!-- Software App 2 -->
+        <div class="bento-card bento-app has-bg glass-panel group"
+            style="background-image: url('./assets/fitness.png');">
+            <div class="card-overlay">
+                <p class="tag">Engine</p>
+                <h3>FitFlow Matrix</h3>
+                <span class="tech-tag">Flutter / 3D Render</span>
+            </div>
+        </div>
+
+        <!-- Photography Highlight 1 -->
+        <div class="bento-card bento-photo has-bg glass-panel group"
+            style="background-image: url('./assets/wedding_1.png');">
+            <div class="card-overlay">
+                <p class="tag">Optics</p>
+                <h3>Golden Hour Render</h3>
+            </div>
+        </div>
+
+        <!-- Photography Highlight 2 -->
+        <div class="bento-card bento-photo has-bg glass-panel group bg-top"
+            style="background-image: url('./assets/wedding_2.png');">
+            <div class="card-overlay">
+                <p class="tag">Optics</p>
+                <h3>Subject in Focus</h3>
+            </div>
+        </div>
+
+        <!-- Status / Contact mini card -->
+        <div class="bento-card bento-status glass-panel">
+            <div class="pulse-indicator">
+                <span class="pulse"></span> System Online
+            </div>
+        </div>
+    </main>
+
+    <!-- Main JS -->
+    <script src="main.js"></script>
+</body>
+
+</html>

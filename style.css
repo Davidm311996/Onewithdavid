@@ -1,0 +1,456 @@
+/* 
+  David Madienguela - Dynamic "Techy & Bubbly" Bento Box Portfolio
+  Compact, at-a-glance dashboard layout.
+*/
+
+:root {
+  /* Vibrant, Techy Palette */
+  --bg-primary: #020008;
+  --text-primary: #ffffff;
+  --text-secondary: #a3c2ff;
+
+  --neon-cyan: #00f3ff;
+  --neon-pink: #ff00c8;
+  --neon-purple: #9d00ff;
+
+  --glass-bg: rgba(20, 10, 40, 0.4);
+  --glass-border: rgba(0, 243, 255, 0.3);
+  --glass-shadow: 0 10px 30px 0 rgba(157, 0, 255, 0.15);
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  /* Prevent scrolling for the compact view */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   7. Custom Cursor
+========================================= */
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--neon-pink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background-color 0.3s;
+  mix-blend-mode: screen;
+}
+
+.cursor-outline.hovering {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 0, 200, 0.2);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+/* Background Canvas */
+#bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Bento Container */
+.bento-container {
+  width: 95%;
+  max-width: 1300px;
+  height: 90vh;
+  /* mostly fits in viewport */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  z-index: 2;
+}
+
+/* Glass & Bubbly Cards */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 35px;
+  /* highly bubbly */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s;
+  transform-style: preserve-3d;
+}
+
+.glass-panel:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 15px 40px rgba(0, 243, 255, 0.2);
+}
+
+/* Specific Grid Placements */
+.bento-hero {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-about {
+  grid-column: span 2;
+  grid-row: span 1;
+  padding: 25px;
+  justify-content: flex-start;
+}
+
+.bento-app {
+  grid-column: span 1;
+  grid-row: span 1;
+  padding: 0;
+}
+
+.bento-photo {
+  grid-column: span 1;
+  grid-row: span 1;
+  padding: 0;
+}
+
+.bento-status {
+  grid-column: span 2;
+  grid-row: span 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contents */
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.typewriter-container {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-family: var(--font-heading);
+  color: var(--neon-cyan);
+  margin-bottom: 20px;
+  min-height: 2.5rem;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: var(--neon-pink);
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-desc {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  max-width: 90%;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--neon-cyan);
+  color: #000;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 0 25px rgba(255, 0, 200, 0.6);
+  background: var(--neon-pink);
+  color: #000;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  color: var(--neon-cyan);
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.social-icon:hover {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: 0 0 15px var(--neon-cyan);
+  transform: scale(1.1);
+}
+
+/* About Modals/Pills */
+.bento-about h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.bento-about p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 15px;
+}
+
+.about-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.pill:hover {
+  background: rgba(0, 243, 255, 0.1);
+  border-color: var(--neon-cyan);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+/* Image Cards (Apps & Photos) */
+.has-bg {
+  background-size: cover;
+  background-position: center;
+  border: none;
+}
+
+.bg-top {
+  background-position: top;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 0, 8, 0.75);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0.8;
+  transition: opacity 0.3s, background 0.3s;
+}
+
+.has-bg:hover .card-overlay {
+  opacity: 1;
+  background: rgba(157, 0, 255, 0.4);
+}
+
+.tag {
+  font-size: 0.8rem;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.has-bg:hover .tag {
+  color: var(--neon-pink);
+}
+
+.has-bg h3 {
+  font-size: 1.4rem;
+  color: #fff;
+  transition: transform 0.3s;
+}
+
+.has-bg:hover h3 {
+  transform: translateY(-5px);
+}
+
+.tech-tag {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 5px;
+}
+
+/* Status */
+.bento-status {
+  font-size: 1.4rem;
+  font-family: var(--font-heading);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pulse-indicator {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  letter-spacing: 1px;
+}
+
+.pulse {
+  width: 15px;
+  height: 15px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7);
+  animation: pulsing 2s infinite;
+}
+
+@keyframes pulsing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 243, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 243, 255, 0);
+  }
+}
+
+
+/* Mobile stack adjustments */
+@media (max-width: 900px) {
+  .bento-container {
+    height: auto;
+    padding-bottom: 50px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  html,
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  body {
+    align-items: flex-start;
+    padding: 20px 15px;
+    /* Added more padding for edge breathing room */
+  }
+
+  .bento-hero {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 500px;
+  }
+
+  .bento-about {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 250px;
+  }
+
+  .bento-app {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 350px;
+  }
+
+  .bento-photo {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 350px;
+  }
+
+  .bento-status {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 100px;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  /* Disable custom cursor on touch */
+  body.has-custom-cursor {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+}
